@@ -1,28 +1,23 @@
-extends ../layouts/common.pug
+form.seach-form(action="/users/search")
+  input(name="name", type="text", placeholder="name")
+  input(name="age", type="text", placeholder="age")
+  input(type="submit")
 
-block content
+.uses
+  h2 All users
+  if users.length > 0
+    table
+      thead
+        tr
+          th  Name 
+          th  Action 
+      tbody
+        each user in users
+          tr
+            td=  user.name 
+            td
+              a(href="/users/" + user.id) View
+  else
+    p No user to display
 
-    h2 Searching
-    form.seach-form(action="/users/search")
-      input(name="name", type="text", placeholder="name")
-      input(name="age", type="text", placeholder="age")
-      input(type="submit")
-
-    .users 
-      h2 All users
-      if users.length > 0
-        table
-          thead
-            tr
-              th  Name 
-              th  Action 
-          tbody
-            each user in users
-              tr
-                td=  user.name 
-                td
-                  a(href="/users/" + user.id) View
-      else
-        p No user to display
-
-    a(href="/users/create") Create new user
+a(href="/users/create") Create new user

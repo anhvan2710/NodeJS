@@ -1,0 +1,8 @@
+h2 Login
+form(action="/auth/login" method="POST")
+	
+	label(id="email")
+	input(type="text", placeholder="Your email address", name="email", value= values? values.email : "")
+	label(id="password")
+	input(type="text", placeholder="Your password", name="password", value= values? values.password : "")
+	input(type="submit")
