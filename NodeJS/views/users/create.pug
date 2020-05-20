@@ -1,9 +1,11 @@
 h2 Create new user
-form(action="/users/create" method="POST")
+form(action="/users/create" method="POST", enctype="multipart/form-data")
 	label(id="name")
 	input(type="text", placeholder="Your name", name="name")
 	label(id="email")
 	input(type="text", placeholder="Your email address", name="email")
 	label(id="age")
 	input(type="text", placeholder="Your age", name="age")
+	label(id="avatar")
+	input(type="file",  name="avatar")
 	input(type="submit")

@@ -1,18 +1,23 @@
+require('dotenv').config()
+console.log(process.env.SESSION_SECRET);
 const express = require('express')
 const app = express()
 const port = 3000
 const userRoute = require('./routes/user')
 const authRoute = require('./routes/auth')
 var cookieParser = require('cookie-parser')
-app.use(cookieParser('ABCDEF'))
+var bodyParser = require('body-parser')
+
+app.use(cookieParser(process.env.SESSION_SECRET))
+app.use(express.static('public'))
 
 const requireAuthController = require('./middlewares/auth.middleware')
 
 
 app.set('views', './views'); // Thư mục views nằm cùng cấp với file app.js
 app.set('view engine', 'pug'); 
-app.use(express.json()) // for parsing application/json
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use('/users', requireAuthController.requireAuth, userRoute);
 app.use('/auth', authRoute);
 
